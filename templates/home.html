@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetworkZone</title>
+
+<link rel="icon" href="https://docs.google.com/drawings/d/e/2PACX-1vSW5tNSeVxW-F768327w2C0Zqmx0_7YKAhddXpPjAm6dcgIow2BEodfg2OsspelXQX41dC_4Qp3BOAy/pub?w=960&h=528">
+
+    <style>
+.button-85 {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+
+}
+
+.rainbow {
+    text-align: center;
+    text-decoration: underline;
+    font-family: monospace;
+}
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
+    }
+}
+
+    </style>
+
+</head>
+<body style="background-color:black">
+{% block title %}
+Speed Test
+{% endblock %}
+{% block content %}
+<center><img src="https://docs.google.com/drawings/d/e/2PACX-1vTs9bHPBha3m_1Ua6clXc8bpbWutqlJz3Zn-zLVOyBwyUMjm-6dwXP4G7yQfm0MNlIBrC4dfpl0vi87/pub?w=960&h=720" width="225" height="150">
+
+    <table style="height: 247px; background-color: rgba(128, 128, 128, 0.5); border-color: #ffffff; width: 514px;" border="0" cellspacing="0" cellpadding="3">
+<tbody>
+<tr>
+<th style="width: 200px; vertical-align:top; color:white">
+    Current Fastest Speed
+    {%for item in vinell %}
+        <p style="font-size:30px" class="rainbow rainbow_text_animated">{{item['Speed']}} Mbps</p>
+    Location
+        <p style="font-size:30px" class="rainbow rainbow_text_animated">{{item['Location']}}</p>
+        {% endfor %}
+</th>
+    <td style="width: 50px; background-color: black"></td>
+
+<th style="width: 400px; vertical-align:top; color:white">
+    Check Your Internet Speed!
+    <form method="POST">
+        <p>Enter your location:</p>
+    <input type="text" name="Location" placeholder="ex: Library">
+        <p></p>
+        <button type="submit" class="button-85" role="button">Run Speed Test</button>
+        <p>Please wait as the speed test runs. The process usually takes around 15-30 seconds.</p>
+        <h1></h1>
+        <table style="height: 69px;background-color: rgba(128, 128, 128, 0.5); border-color: #ffffff; width: 400px;" border="0" cellspacing="0" cellpadding="3" width="500">
+        <tbody>
+<tr>
+    <td style="width: 546px;">
+        <p>Latest Speed</p>
+        {%for speed in latest %}
+        <p style="font-size:30px" class="rainbow rainbow_text_animated">{{speed['Speed']}} Mbps</p>
+        <p></p>
+    Location
+        <p style="font-size:30px" class="rainbow rainbow_text_animated">{{speed['Location']}}</p>
+        {% endfor %}
+        </td>
+</tr>
+</tbody>
+</table>
+
+
+</form>
+</th>
+
+</tr>
+</tbody>
+</table>
+
+    </center>
+{% endblock %}
+</body>
+</html>
